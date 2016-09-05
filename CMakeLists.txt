@@ -167,3 +167,7 @@ else()
     )
 
 endif()
+
+add_subdirectory(${CMAKE_SOURCE_DIR}/vendor/entityx-1.2.0)
+include_directories(${CMAKE_SOURCE_DIR}/vendor/entityx-1.2.0)
+target_link_libraries(${APP_NAME} entityx)
