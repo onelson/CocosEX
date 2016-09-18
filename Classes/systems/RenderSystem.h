@@ -1,9 +1,9 @@
+#ifndef MYGAME_RENDERSYSTEM_H
+#define MYGAME_RENDERSYSTEM_H
+
 #include <components/Sprited.h>
 #include <components/Body.h>
 #include "entityx/entityx.h"
-
-#ifndef MYGAME_RENDERSYSTEM_H
-#define MYGAME_RENDERSYSTEM_H
 
 namespace ex = entityx;
 
