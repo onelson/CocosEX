@@ -1,5 +1,8 @@
 #include "HelloWorldScene.h"
 #include "SimpleAudioEngine.h"
+#include "EntityEngine.h"
+#include <components/Body.h>
+#include <components/Sprited.h>
 
 USING_NS_CC;
 
@@ -67,8 +70,14 @@ bool HelloWorld::init()
     // add "HelloWorld" splash screen"
     auto sprite = Sprite::create("HelloWorld.png");
 
-    // position the sprite on the center of the screen
-    sprite->setPosition(Vec2(visibleSize.width/2 + origin.x, visibleSize.height/2 + origin.y));
+    // the call to entities.create() will segfault
+
+//    ex::Entity entity = entityEngine->entities.create();
+//    entity.assign<Body>(Vec2(visibleSize.width/2 + origin.x, visibleSize.height/2 + origin.y));
+//    entity.assign<Sprited>(sprite);
+
+    // original cocos example call (to be replaced by entity system use)
+     sprite->setPosition(Vec2(visibleSize.width/2 + origin.x, visibleSize.height/2 + origin.y));
 
     // add the sprite as a child to this layer
     this->addChild(sprite, 0);
@@ -90,6 +99,9 @@ void HelloWorld::menuCloseCallback(Ref* pSender)
     
     //EventCustom customEndEvent("game_scene_close_event");
     //_eventDispatcher->dispatchEvent(&customEndEvent);
-    
-    
+
+}
+
+void HelloWorld::update(float delta){
+    entityEngine->update(delta);
 }

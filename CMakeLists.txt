@@ -132,7 +132,7 @@ set(GAME_HEADERS
   Classes/AppDelegate.h
   Classes/HelloWorldScene.h
   ${PLATFORM_SPECIFIC_HEADERS}
-)
+        Classes/EntityEngine.cpp Classes/EntityEngine.h Classes/components/Sprited.cpp Classes/components/Sprited.h Classes/systems/RenderSystem.cpp Classes/systems/RenderSystem.h Classes/components/Body.cpp Classes/components/Body.h)
 
 if( ANDROID )
     add_library(${APP_NAME} SHARED ${GAME_SRC} ${GAME_HEADERS})
