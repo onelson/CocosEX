@@ -8,12 +8,11 @@
 namespace ex = entityx;
 
 class EntityEngine : public ex::EntityX {
+public:
     explicit EntityEngine() {
         systems.add<RenderSystem>();
         systems.configure();
     }
-public:
-
     void update(ex::TimeDelta);
 };
 

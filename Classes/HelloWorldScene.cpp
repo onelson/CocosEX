@@ -1,8 +1,5 @@
 #include "HelloWorldScene.h"
 #include "SimpleAudioEngine.h"
-#include "EntityEngine.h"
-#include <components/Body.h>
-#include <components/Sprited.h>
 
 USING_NS_CC;
 
@@ -70,18 +67,17 @@ bool HelloWorld::init()
     // add "HelloWorld" splash screen"
     auto sprite = Sprite::create("HelloWorld.png");
 
-    // the call to entities.create() will segfault
-
-//    ex::Entity entity = entityEngine->entities.create();
-//    entity.assign<Body>(Vec2(visibleSize.width/2 + origin.x, visibleSize.height/2 + origin.y));
-//    entity.assign<Sprited>(sprite);
-
     // original cocos example call (to be replaced by entity system use)
-     sprite->setPosition(Vec2(visibleSize.width/2 + origin.x, visibleSize.height/2 + origin.y));
+    //     sprite->setPosition(Vec2(visibleSize.width/2 + origin.x, visibleSize.height/2 + origin.y));
+    auto entity = entityEngine.entities.create();
+    entity.assign<Body>(Vec2(visibleSize.width/2 + origin.x, visibleSize.height/2 + origin.y));
+    entity.assign<Sprited>(sprite);
 
     // add the sprite as a child to this layer
     this->addChild(sprite, 0);
-    
+
+    this->scheduleUpdate();  // added to pump deltas to the entity engine
+
     return true;
 }
 
@@ -102,6 +98,6 @@ void HelloWorld::menuCloseCallback(Ref* pSender)
 
 }
 
-void HelloWorld::update(float delta){
-    entityEngine->update(delta);
+void HelloWorld::update(float delta) {
+    entityEngine.update(delta);
 }

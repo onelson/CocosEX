@@ -11,8 +11,6 @@ public:
 
     virtual bool init();
 
-    EntityEngine* entityEngine;
-
     // a selector callback
     void menuCloseCallback(cocos2d::Ref* pSender);
 
@@ -20,6 +18,8 @@ public:
     CREATE_FUNC(HelloWorld);
 
     void update(float) override;
+
+    EntityEngine entityEngine;
 
 };
 
