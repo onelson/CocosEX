@@ -124,13 +124,13 @@ endif( WIN32 )
 
 set(GAME_SRC
   Classes/AppDelegate.cpp
-  Classes/HelloWorldScene.cpp
+        Classes/worlds/HelloWorldScene.cpp
   ${PLATFORM_SPECIFIC_SRC}
 )
 
 set(GAME_HEADERS
   Classes/AppDelegate.h
-  Classes/HelloWorldScene.h
+        Classes/worlds/HelloWorldScene.h
   ${PLATFORM_SPECIFIC_HEADERS}
         Classes/EntityEngine.cpp Classes/EntityEngine.h Classes/components/Sprited.cpp Classes/components/Sprited.h Classes/systems/RenderSystem.cpp Classes/systems/RenderSystem.h Classes/components/Body.cpp Classes/components/Body.h Classes/systems/Spinner.cpp Classes/systems/Spinner.h)
 

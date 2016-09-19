@@ -1,5 +1,5 @@
 #include "AppDelegate.h"
-#include "HelloWorldScene.h"
+#include "worlds/HelloWorldScene.h"
 
 USING_NS_CC;
 
@@ -73,8 +73,24 @@ bool AppDelegate::applicationDidFinishLaunching() {
 
     register_all_packages();
 
-    // create a scene. it's an autorelease object
-    auto scene = HelloWorld::createScene();
+    Scene* scene;
+    const char* pWorld = std::getenv("OMN_WORLD");
+
+    if ( pWorld == nullptr ) {
+        scene = HelloWorld::createScene();
+    }
+    else {
+        const std::string worldName(pWorld);
+        if  (worldName == "Greetz") {
+            // TODO
+        }
+        else {
+            // default scene
+            scene = HelloWorld::createScene();
+        }
+    }
+
+
 
     // run
     director->runWithScene(scene);
