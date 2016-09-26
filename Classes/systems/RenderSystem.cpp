@@ -13,7 +13,7 @@ void RenderSystem::update(ex::EntityManager &es, ex::EventManager &events, ex::T
 
     if (last_update >= 0.5) {
         const double fps = frame_count / last_update;
-        printf("%lu entities (%d fps)\n", es.size(), static_cast<int>(fps));
+        log("%lu entities (%d fps)", es.size(), static_cast<int>(fps));
         last_update = 0.0;
         frame_count = 0.0;
     }
