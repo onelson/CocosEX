@@ -3,8 +3,7 @@
 #include <systems/RenderSystem.h>
 #include <systems/Spinner.h>
 
-#ifndef MYGAME_ENTITYENGINE_H
-#define MYGAME_ENTITYENGINE_H
+#pragma once
 
 namespace ex = entityx;
 
@@ -17,5 +16,3 @@ public:
     }
     void update(ex::TimeDelta);
 };
-
-#endif //MYGAME_ENTITYENGINE_H

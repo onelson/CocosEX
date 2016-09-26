@@ -1,5 +1,4 @@
-#ifndef __HELLOWORLD_SCENE_H__
-#define __HELLOWORLD_SCENE_H__
+#pragma once
 
 #include "cocos2d.h"
 #include "EntityEngine.h"
@@ -22,5 +21,3 @@ public:
     EntityEngine entityEngine;
 
 };
-
-#endif // __HELLOWORLD_SCENE_H__

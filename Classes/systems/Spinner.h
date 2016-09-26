@@ -1,5 +1,4 @@
-#ifndef MYGAME_MOVER_H
-#define MYGAME_MOVER_H
+#pragma once
 
 #include <components/Body.h>
 #include "entityx/entityx.h"
@@ -11,6 +10,3 @@ public:
     void update(ex::EntityManager &es, ex::EventManager &events, ex::TimeDelta dt) override;
 
 };
-
-
-#endif //MYGAME_MOVER_H

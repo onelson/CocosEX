@@ -1,5 +1,4 @@
-#ifndef MYGAME_BODY_H
-#define MYGAME_BODY_H
+#pragma once
 
 #include "cocos2d.h"
 
@@ -11,5 +10,3 @@ struct Body {
     Vec2 position;
     float rotation = 0.0, rotationd;
 };
-
-#endif //MYGAME_BODY_H

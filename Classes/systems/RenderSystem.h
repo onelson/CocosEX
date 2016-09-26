@@ -1,5 +1,4 @@
-#ifndef MYGAME_RENDERSYSTEM_H
-#define MYGAME_RENDERSYSTEM_H
+#pragma once
 
 #include <components/Sprited.h>
 #include <components/Body.h>
@@ -15,7 +14,3 @@ private:
     double last_update = 0.0;
     double frame_count = 0.0;
 };
-
-
-
-#endif //MYGAME_RENDERSYSTEM_H
