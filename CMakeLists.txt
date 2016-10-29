@@ -26,7 +26,7 @@ cmake_policy(SET CMP0017 NEW)
 
 cmake_minimum_required(VERSION 3.1)
 
-set(APP_NAME MyGame)
+set(APP_NAME OmnLabs)
 project (${APP_NAME})
 
 set(COCOS2D_ROOT ${CMAKE_SOURCE_DIR}/cocos2d)
@@ -39,11 +39,25 @@ set(BUILD_CPP_EMPTY_TEST OFF CACHE BOOL "turn off build cpp-empty-test")
 set(BUILD_CPP_TESTS OFF CACHE BOOL "turn off build cpp-tests")
 set(BUILD_LUA_LIBS OFF CACHE BOOL "turn off build lua related targets")
 set(BUILD_JS_LIBS OFF CACHE BOOL "turn off build js related targets")
+
+#set(USE_SOURCES_EXTERNAL ON CACHE BOOL "Use some libraries from cocos2dx externals")
+#set(USE_BULLET OFF CACHE BOOL "Turn off Bullet (3d physics)")
+#set(USE_RECAST OFF CACHE BOOL "Turn off Recast (3d pathfinding)")
+#set(USE_CHIPMUNK OFF CACHE BOOL "Turn off Chipmunk (2d physics)")
+#set(USE_BOX2D ON CACHE BOOL "Turn on Box2D for 2D physics")
+
+if(MINGW)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fpermissive")
+endif()
+
 add_subdirectory(${COCOS2D_ROOT})
 
+add_definitions(-DCC_USE_PHYSICS=0)
+
 # Some macro definitions
+
 if(WINDOWS)
-  if(BUILD_SHARED_LIBS)
+    if(BUILD_SHARED_LIBS)
     ADD_DEFINITIONS (-D_USRDLL -D_EXPORT_DLL_ -D_USEGUIDLL -D_USREXDLL -D_USRSTUDIODLL)
   else()
     ADD_DEFINITIONS (-DCC_STATIC)
@@ -62,7 +76,7 @@ elseif(ANDROID)
   ADD_DEFINITIONS (-DUSE_FILE32API)
   set(PLATFORM_FOLDER android)
 else()
-  message( FATAL_ERROR "Unsupported platform, CMake will exit" )
+  message( FATAL_ERROR "Unsupported platform, CMake will exit")
 endif()
 
 
