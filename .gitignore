@@ -33,3 +33,7 @@
 
 # IDE
 .idea
+
+cocos2d/external
+cocos2d/v3-deps-*.zip
+target/

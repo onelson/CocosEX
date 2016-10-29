@@ -40,11 +40,13 @@ set(BUILD_CPP_TESTS OFF CACHE BOOL "turn off build cpp-tests")
 set(BUILD_LUA_LIBS OFF CACHE BOOL "turn off build lua related targets")
 set(BUILD_JS_LIBS OFF CACHE BOOL "turn off build js related targets")
 
-#set(USE_SOURCES_EXTERNAL ON CACHE BOOL "Use some libraries from cocos2dx externals")
+set(USE_SOURCES_EXTERNAL ON CACHE BOOL "Use some libraries from cocos2dx externals")
 #set(USE_BULLET OFF CACHE BOOL "Turn off Bullet (3d physics)")
 #set(USE_RECAST OFF CACHE BOOL "Turn off Recast (3d pathfinding)")
-#set(USE_CHIPMUNK OFF CACHE BOOL "Turn off Chipmunk (2d physics)")
-#set(USE_BOX2D ON CACHE BOOL "Turn on Box2D for 2D physics")
+set(USE_CHIPMUNK OFF CACHE BOOL "Turn off Chipmunk (2d physics)")
+
+set(BUILD_BOX2D ON CACHE BOOL "Build Box2D")
+set(USE_BOX2D ON CACHE BOOL "Turn on Box2D for 2D physics")
 
 if(MINGW)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fpermissive")
@@ -167,7 +169,7 @@ set_target_properties(${APP_NAME} PROPERTIES
 if ( WIN32 )
   #also copying dlls to binary directory for the executable to run
   pre_build(${APP_NAME}
-    COMMAND ${CMAKE_COMMAND} -E remove_directory ${APP_BIN_DIR}/Resources
+    COMMAND ${CMAKE_COMMAND} -E remove -f ${APP_BIN_DIR}/Resources
     COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_CURRENT_SOURCE_DIR}/Resources ${APP_BIN_DIR}/Resources
     COMMAND ${CMAKE_COMMAND} -E copy ${COCOS2D_ROOT}/external/win32-specific/gles/prebuilt/glew32.dll ${APP_BIN_DIR}/${CMAKE_BUILD_TYPE}
 	COMMAND ${CMAKE_COMMAND} -E copy ${COCOS2D_ROOT}/external/win32-specific/zlib/prebuilt/zlib1.dll ${APP_BIN_DIR}/${CMAKE_BUILD_TYPE}
@@ -176,7 +178,7 @@ elseif( ANDROID )
 
 else()
   pre_build(${APP_NAME}
-    COMMAND ${CMAKE_COMMAND} -E remove_directory ${APP_BIN_DIR}/Resources
+    COMMAND ${CMAKE_COMMAND} -E remove -f ${APP_BIN_DIR}/Resources
     COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_CURRENT_SOURCE_DIR}/Resources ${APP_BIN_DIR}/Resources
     )
 
