@@ -29,16 +29,29 @@ cmake_minimum_required(VERSION 3.1)
 set(APP_NAME OmnLabs)
 project (${APP_NAME})
 
+#set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "build")
+
 set(COCOS2D_ROOT ${CMAKE_SOURCE_DIR}/cocos2d)
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${COCOS2D_ROOT}/cmake/Modules/")
 include(CocosBuildHelpers)
 
+# entityx
+set(ENTITYX_BUILD_SHARED OFF CACHE BOOL "turn off build entityx-shared")
+set(ENTITYX_BUILD_TESTING OFF CACHE BOOL "turn off build entityx-testing")
+
 # libcocos2d
 set(BUILD_CPP_EMPTY_TEST OFF CACHE BOOL "turn off build cpp-empty-test")
-set(BUILD_CPP_TESTS OFF CACHE BOOL "turn off build cpp-tests")
 set(BUILD_LUA_LIBS OFF CACHE BOOL "turn off build lua related targets")
 set(BUILD_JS_LIBS OFF CACHE BOOL "turn off build js related targets")
+
+set(BUILD_CPP_TESTS OFF CACHE BOOL "turn off build cpp-tests")
+set(BUILD_JS_TESTS OFF CACHE BOOL "turn off build js-tests")
+set(BUILD_LUA_TESTS OFF CACHE BOOL "turn off build lua-tests")
+
+set(BUILD_EDITOR_COCOSBUILDER OFF CACHE BOOL, "disable cocosbuilder")
+set(BUILD_EDITOR_COCOSTUDIO OFF CACHE BOOL, "disable cocostudio")
+set(BUILD_EDITOR_SPINE OFF CACHE BOOL, "disable spine")
 
 set(USE_SOURCES_EXTERNAL ON CACHE BOOL "Use some libraries from cocos2dx externals")
 #set(USE_BULLET OFF CACHE BOOL "Turn off Bullet (3d physics)")
@@ -49,7 +62,7 @@ set(BUILD_BOX2D ON CACHE BOOL "Build Box2D")
 set(USE_BOX2D ON CACHE BOOL "Turn on Box2D for 2D physics")
 
 if(MINGW)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fpermissive")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fpermissive -Wno-error=terminate")
 endif()
 
 add_subdirectory(${COCOS2D_ROOT})
@@ -166,7 +179,7 @@ set(APP_BIN_DIR "${CMAKE_BINARY_DIR}/bin")
 set_target_properties(${APP_NAME} PROPERTIES
      RUNTIME_OUTPUT_DIRECTORY  "${APP_BIN_DIR}")
 
-if ( WIN32 )
+if ( WIN32 OR MINGW )
   #also copying dlls to binary directory for the executable to run
   pre_build(${APP_NAME}
     COMMAND ${CMAKE_COMMAND} -E remove -f ${APP_BIN_DIR}/Resources
@@ -178,7 +191,7 @@ elseif( ANDROID )
 
 else()
   pre_build(${APP_NAME}
-    COMMAND ${CMAKE_COMMAND} -E remove -f ${APP_BIN_DIR}/Resources
+    COMMAND ${CMAKE_COMMAND} -E remove_directory ${APP_BIN_DIR}/Resources
     COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_CURRENT_SOURCE_DIR}/Resources ${APP_BIN_DIR}/Resources
     )
 
