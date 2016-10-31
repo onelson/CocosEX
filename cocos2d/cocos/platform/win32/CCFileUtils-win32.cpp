@@ -72,8 +72,7 @@ static void _checkPath()
 
         char utf8ExeDir[CC_MAX_PATH] = { 0 };
         int nNum = WideCharToMultiByte(CP_UTF8, 0, pUtf16ExePath, pUtf16DirEnd-pUtf16ExePath+1, utf8ExeDir, sizeof(utf8ExeDir), nullptr, nullptr);
-        // XXX: added "Resources/" to this path - resources didn't copy in mingw via CMake otherwise. sln probably out of sync
-        s_resourcePath = convertPathFormatToUnixStyle(utf8ExeDir) += "Resources/";
+        s_resourcePath = convertPathFormatToUnixStyle(utf8ExeDir);
     }
 }
 

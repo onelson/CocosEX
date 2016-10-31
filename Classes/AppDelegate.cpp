@@ -10,6 +10,8 @@ static cocos2d::Size largeResolutionSize = cocos2d::Size(2048, 1536);
 
 AppDelegate::AppDelegate()
 {
+    // XXX: added "Resources/" to this path - resources didn't copy in mingw via CMake otherwise. sln probably out of sync
+    FileUtils::getInstance()->addSearchPath("Resources");
 }
 
 AppDelegate::~AppDelegate() 
