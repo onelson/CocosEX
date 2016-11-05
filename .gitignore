@@ -34,6 +34,7 @@
 # IDE
 .idea
 
-cocos2d/external
-cocos2d/v3-deps-*.zip
+cocos2d/external/*
+!cocos2d/external/config.json
+cocos2d/*-deps-*.zip
 build/

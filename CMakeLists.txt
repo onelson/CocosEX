@@ -29,8 +29,6 @@ cmake_minimum_required(VERSION 3.1)
 set(APP_NAME OmnLabs)
 project (${APP_NAME})
 
-#set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "build")
-
 set(COCOS2D_ROOT ${CMAKE_SOURCE_DIR}/cocos2d)
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${COCOS2D_ROOT}/cmake/Modules/")
@@ -42,10 +40,10 @@ set(ENTITYX_BUILD_TESTING OFF CACHE BOOL "turn off build entityx-testing")
 
 # libcocos2d
 set(BUILD_CPP_EMPTY_TEST OFF CACHE BOOL "turn off build cpp-empty-test")
+set(BUILD_CPP_TESTS OFF CACHE BOOL "turn off build cpp-tests")
 set(BUILD_LUA_LIBS OFF CACHE BOOL "turn off build lua related targets")
 set(BUILD_JS_LIBS OFF CACHE BOOL "turn off build js related targets")
 
-set(BUILD_CPP_TESTS OFF CACHE BOOL "turn off build cpp-tests")
 set(BUILD_JS_TESTS OFF CACHE BOOL "turn off build js-tests")
 set(BUILD_LUA_TESTS OFF CACHE BOOL "turn off build lua-tests")
 
@@ -70,9 +68,8 @@ add_subdirectory(${COCOS2D_ROOT})
 add_definitions(-DCC_USE_PHYSICS=0)
 
 # Some macro definitions
-
 if(WINDOWS)
-    if(BUILD_SHARED_LIBS)
+  if(BUILD_SHARED_LIBS)
     ADD_DEFINITIONS (-D_USRDLL -D_EXPORT_DLL_ -D_USEGUIDLL -D_USREXDLL -D_USRSTUDIODLL)
   else()
     ADD_DEFINITIONS (-DCC_STATIC)
@@ -91,7 +88,7 @@ elseif(ANDROID)
   ADD_DEFINITIONS (-DUSE_FILE32API)
   set(PLATFORM_FOLDER android)
 else()
-  message( FATAL_ERROR "Unsupported platform, CMake will exit")
+  message( FATAL_ERROR "Unsupported platform, CMake will exit" )
 endif()
 
 
@@ -151,17 +148,18 @@ if ( WIN32 )
 )
 endif( WIN32 )
 
+
+FILE(GLOB_RECURSE omnSrc RELATIVE "${CMAKE_CURRENT_SOURCE_DIR}" "${CMAKE_CURRENT_SOURCE_DIR}/Classes/*.cpp")
+FILE(GLOB_RECURSE omnHeaders RELATIVE "${CMAKE_CURRENT_SOURCE_DIR}" "${CMAKE_CURRENT_SOURCE_DIR}/Classes/*.h")
+
 set(GAME_SRC
-  Classes/AppDelegate.cpp
-        Classes/worlds/HelloWorldScene.cpp
-  ${PLATFORM_SPECIFIC_SRC}
+        ${omnSrc}
+        ${PLATFORM_SPECIFIC_SRC}
 )
 
 set(GAME_HEADERS
-  Classes/AppDelegate.h
-        Classes/worlds/HelloWorldScene.h
-  ${PLATFORM_SPECIFIC_HEADERS}
-        Classes/EntityEngine.cpp Classes/EntityEngine.h Classes/components/Sprited.cpp Classes/components/Sprited.h Classes/systems/RenderSystem.cpp Classes/systems/RenderSystem.h Classes/components/Body.cpp Classes/components/Body.h Classes/systems/Spinner.cpp Classes/systems/Spinner.h)
+        ${omnHeaders}
+        ${PLATFORM_SPECIFIC_HEADERS})
 
 if( ANDROID )
     add_library(${APP_NAME} SHARED ${GAME_SRC} ${GAME_HEADERS})
