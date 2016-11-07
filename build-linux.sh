@@ -1,11 +1,9 @@
 #!/bin/bash
 
 set -e 
-
-mkdir -p build/
+rm -rf build/release/omnlabs-linux
+mkdir -p build/release/omnlabs-linux
 cd build
 cmake ../ -DCMAKE_BUILD_TYPE=Release
 make
-rm -rf release/omnlabs-linux
-mkdir -p release/omnlabs-linux
 cp -r bin/* release/omnlabs-linux/
