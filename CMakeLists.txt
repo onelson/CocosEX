@@ -146,6 +146,8 @@ if ( WIN32 )
   ${COCOS2D_ROOT}/external/glfw3/include/win32
   ${COCOS2D_ROOT}/external/win32-specific/gles/include/OGLES
 )
+elseif( LINUX )
+    include_directories(${COCOS2D_ROOT}/external/linux-specific/fmod/include)
 endif( WIN32 )
 
 
